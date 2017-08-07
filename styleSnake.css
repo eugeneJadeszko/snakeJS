@@ -1,0 +1,21 @@
+.cell {
+    width: 35px;
+    height: 35px;
+    display: inline-table;
+    font-size: xx-large;
+    color: aliceblue;
+    border: 1px solid black;
+    border-radius: 3px;
+}
+
+.row {
+
+}
+
+.field {
+    border: 3px solid black;
+}
+
+.food {
+    background-color: darkmagenta;
+}
