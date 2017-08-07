@@ -1,6 +1,6 @@
 var mainElement = document.getElementById("main");
 var intervalId;
-var FIELD_SIZE = 9;
+var FIELD_SIZE = 15;
 var FIELD_COLOR = "rgb(240, 240, 240)";
 var DELAY = 400;
 var currentRow;
@@ -25,9 +25,10 @@ function createSnakeCell(cell) {
 }
 
 function createFood(foodWidth, foodHeight) {
+    console.log(foodWidth + ", " + foodHeight);
     var foodCell = getCellByCoord(foodWidth, foodHeight);
     if (checkSnakeCell(foodCell)) {
-        createFood(generateX(), generateY());
+        createFood(generateY(), generateX());
     }
     foodCell.style.backgroundColor = "8b008b";
     foodCoord.height = foodHeight;
@@ -83,7 +84,7 @@ function eat() {
 }
 
 function boundsCheck(coord) {
-    if ((coord[0] > FIELD_SIZE - 1) || (coord[0] < 0)) gameOver();
+    if ((coord[0] > FIELD_SIZE) || (coord[0] < 0)) gameOver();
     if ((coord[1] > FIELD_SIZE - 1) || (coord[1] < 0)) gameOver();
 }
 
@@ -137,11 +138,11 @@ function buttonCheck(e) {
 }
 
 function generateX() {
-    return Math.floor(Math.random() * (FIELD_SIZE - 1));
+    return Math.floor(Math.random() * (FIELD_SIZE - 3) + 1);
 }
 
 function generateY() {
-    return Math.floor(Math.random() * (FIELD_SIZE - 1));
+    return Math.floor(Math.random() * (FIELD_SIZE - 3) + 1);
 }
 
 var snake = {
