@@ -1,8 +1,9 @@
 var mainElement = document.getElementById("main");
 var intervalId;
-var FIELD_SIZE = 15;
+var FIELD_SIZE = 20;
 var FIELD_COLOR = "rgb(240, 240, 240)";
-var DELAY = 400;
+var FOOD_COLOR = "rgb(139, 0, 139)";
+var DELAY = 200;
 var currentRow;
 var currentDirection = [0, -1];
 
@@ -25,14 +26,14 @@ function createSnakeCell(cell) {
 }
 
 function createFood(foodWidth, foodHeight) {
-    console.log(foodWidth + ", " + foodHeight);
     var foodCell = getCellByCoord(foodWidth, foodHeight);
-    if (checkSnakeCell(foodCell)) {
-        createFood(generateY(), generateX());
+    if (!checkSnakeCell(foodCell)) {
+        foodCell.style.backgroundColor = FOOD_COLOR;
+        foodCoord.height = foodHeight;
+        foodCoord.width = foodWidth;
+        return;
     }
-    foodCell.style.backgroundColor = "8b008b";
-    foodCoord.height = foodHeight;
-    foodCoord.width = foodWidth;
+    createFood(generateX(), generateY());
 }
 
 function checkSnakeCell(targetCell) {
@@ -69,6 +70,8 @@ function moveSnake() {
         snake.tail = arraysSum(snake.tail, direction.history.shift());
     } else {
         snake.length++;
+    }
+    if (!(getCellByCoord(foodCoord.width, foodCoord.height).getAttribute("style").localeCompare("background-color: " + FOOD_COLOR + ";") === 0)) {
         createFood(generateX(), generateY());
     }
 
