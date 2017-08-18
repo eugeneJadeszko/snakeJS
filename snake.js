@@ -1,7 +1,7 @@
 var mainElement = document.getElementById("main");
 var intervalId;
 var FIELD_SIZE = 20;
-var FIELD_COLOR = "rgb(240, 240, 240)";
+var FIELD_COLOR = "rgb(47, 79, 79)";
 var FOOD_COLOR = "rgb(139, 0, 139)";
 var DELAY = 200;
 var currentRow;
@@ -11,7 +11,7 @@ window.onload = function () {
     window.addEventListener("keydown", buttonCheck);
     createField(FIELD_SIZE);
     createSnake();
-    createFood(generateX(), generateY());
+    createFood(numberGenerate(), numberGenerate());
     intervalId = setInterval(moveSnake, DELAY);
 };
 
@@ -25,15 +25,15 @@ function createSnakeCell(cell) {
     cell.style.backgroundColor = snake.color;
 }
 
-function createFood(foodWidth, foodHeight) {
-    var foodCell = getCellByCoord(foodWidth, foodHeight);
+function createFood(foodHeight, foodWidth) {
+    var foodCell = getCellByCoord(foodHeight, foodWidth);
     if (!checkSnakeCell(foodCell)) {
         foodCell.style.backgroundColor = FOOD_COLOR;
         foodCoord.height = foodHeight;
         foodCoord.width = foodWidth;
         return;
     }
-    createFood(generateX(), generateY());
+    createFood(numberGenerate(), numberGenerate());
 }
 
 function checkSnakeCell(targetCell) {
@@ -44,8 +44,8 @@ function clearCell(cell) {
     cell.style.backgroundColor = FIELD_COLOR;
 }
 
-function getCellByCoord(width, height) {
-    return mainElement.children[width].children[height];
+function getCellByCoord(height, width) {
+    return mainElement.children[height].children[width];
 }
 
 function createField(size) {
@@ -71,8 +71,8 @@ function moveSnake() {
     } else {
         snake.length++;
     }
-    if (!(getCellByCoord(foodCoord.width, foodCoord.height).getAttribute("style").localeCompare("background-color: " + FOOD_COLOR + ";") === 0)) {
-        createFood(generateX(), generateY());
+    if (!(getCellByCoord(foodCoord.height, foodCoord.width).getAttribute("style").localeCompare("background-color: " + FOOD_COLOR + ";") === 0)) {
+        createFood(numberGenerate(), numberGenerate());
     }
 
     function arraysSum(array, array1) {
@@ -83,7 +83,7 @@ function moveSnake() {
 }
 
 function eat() {
-    return foodCoord.width === snake.head[0] && foodCoord.height === snake.head[1];
+    return foodCoord.height === snake.head[0] && foodCoord.width === snake.head[1];
 }
 
 function boundsCheck(coord) {
@@ -140,11 +140,7 @@ function buttonCheck(e) {
     return false;
 }
 
-function generateX() {
-    return Math.floor(Math.random() * (FIELD_SIZE - 3) + 1);
-}
-
-function generateY() {
+function numberGenerate() {
     return Math.floor(Math.random() * (FIELD_SIZE - 3) + 1);
 }
 
