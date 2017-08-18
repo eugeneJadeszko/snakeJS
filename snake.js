@@ -11,7 +11,7 @@ window.onload = function () {
     window.addEventListener("keydown", buttonCheck);
     createField(FIELD_SIZE);
     createSnake();
-    createFood(generateX(), generateY());
+    createFood(numberGenerate(), numberGenerate());
     intervalId = setInterval(moveSnake, DELAY);
 };
 
@@ -33,7 +33,7 @@ function createFood(foodWidth, foodHeight) {
         foodCoord.width = foodWidth;
         return;
     }
-    createFood(generateX(), generateY());
+    createFood(numberGenerate(), numberGenerate());
 }
 
 function checkSnakeCell(targetCell) {
@@ -72,7 +72,7 @@ function moveSnake() {
         snake.length++;
     }
     if (!(getCellByCoord(foodCoord.width, foodCoord.height).getAttribute("style").localeCompare("background-color: " + FOOD_COLOR + ";") === 0)) {
-        createFood(generateX(), generateY());
+        createFood(numberGenerate(), numberGenerate());
     }
 
     function arraysSum(array, array1) {
@@ -140,11 +140,7 @@ function buttonCheck(e) {
     return false;
 }
 
-function generateX() {
-    return Math.floor(Math.random() * (FIELD_SIZE - 3) + 1);
-}
-
-function generateY() {
+function numberGenerate() {
     return Math.floor(Math.random() * (FIELD_SIZE - 3) + 1);
 }
 
